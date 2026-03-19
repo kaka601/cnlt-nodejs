@@ -1,0 +1,33 @@
+<%- include('layouts/header') %>
+<%- include('layouts/navbar') %>
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Danh sách địa điểm</h1>
+  
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% items.forEach(item => { %>   <!-- ← ĐÃ SỬA TỪ destinations thành items -->
+      <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="<%= item.image %>" 
+               class="card-img-top" 
+               alt="<%= item.name %>" 
+               style="height: 220px; object-fit: cover;">
+          
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= item.name %>
+              <% if (item.hot) { %>
+                <span class="badge bg-danger">HOT 🔥</span>
+              <% } %>
+            </h5>
+            <p class="card-text text-muted"><%= item.desc %></p>
+            <p class="fw-bold text-success fs-5">Giá: <%= item.price %></p>
+            <a href="/detail/<%= item.id %>" class="btn btn-primary w-100">Xem chi tiết</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+<%- include('layouts/footer') %>

@@ -1,0 +1,41 @@
+<%- include('layouts/header') %>
+<%- include('layouts/navbar') %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="/list">Danh sách</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Chi tiết</li>
+                </ol>
+            </nav>
+
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0"><%= item.name %></h2>
+                </div>
+                <div class="card-body">
+                    <p class="lead"><%= item.desc %></p>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="text-success mb-0">Giá tham khảo: <%= item.price %></h4>
+                        <% if(item.hot) { %>
+                            <span class="badge rounded-pill bg-danger p-2 px-3">🔥 Đang cực HOT</span>
+                        <% } %>
+                    </div>
+                    <p class="mt-4 text-muted">
+                        * Thông tin mang tính chất thực hành Node.js + EJS tại Đại học Quy Nhơn.
+                    </p>
+                </div>
+                <div class="card-footer bg-light">
+                    <a href="/list" class="btn btn-secondary">← Quay lại danh sách</a>
+                    <button class="btn btn-primary float-end">Đặt ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('layouts/footer') %>

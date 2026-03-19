@@ -1,0 +1,21 @@
+<%- include('layouts/header') %>
+<%- include('layouts/navbar') %>
+
+<!-- HERO ẢNH NGOÀI XỊN (full màn hình) -->
+<section style="
+    height: 90vh;
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), 
+                url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: center;
+">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-3">Chào mừng đến với trang chủ!</h1>
+        <p class="lead fs-4 mb-4">Đây là bài thực hành số 3 của mình.</p>
+        <a href="/list" class="btn btn-danger btn-lg px-5 py-3">Nhấn vào đây để xem danh sách địa điểm 🔥</a>
+    </div>
+</section>
+
+<%- include('layouts/footer') %>

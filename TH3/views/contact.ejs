@@ -1,0 +1,37 @@
+<%- include('layouts/header') %>
+<%- include('layouts/navbar') %>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="text-primary"><%= title %></h1>
+            <p class="text-muted">Nếu bạn có bất kỳ thắc mắc nào về bài thực hành số 3, hãy liên hệ với mình qua thông tin bên dưới.</p>
+            
+            <ul class="list-group list-group-flush mt-4">
+                <li class="list-group-item"><strong>Họ và tên:</strong> [Tên của bạn]</li>
+                <li class="list-group-item"><strong>Lớp:</strong> Công nghệ thông tin - K46</li>
+                <li class="list-group-item"><strong>Trường:</strong> Đại học Quy Nhơn</li>
+                <li class="list-group-item"><strong>Email:</strong> sinhvien@qnu.edu.vn</li>
+            </ul>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card bg-light p-4 shadow-sm">
+                <h5>Gửi lời nhắn nhanh</h5>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Email của bạn</label>
+                        <input type="email" class="form-control" placeholder="name@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nội dung</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100">Gửi đi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('layouts/footer') %>
