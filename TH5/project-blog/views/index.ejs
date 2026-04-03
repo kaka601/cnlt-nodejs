@@ -19,6 +19,9 @@
           <div class="card shadow h-100">
             <div class="card-body">
               <h4 class="card-title"><%= post.title %></h4>
+              <% if(post.imageUrl) { %>
+                <img src="/uploads/<%= post.imageUrl %>" class="img-fluid mb-2 border rounded" alt="post image" style="max-height: 200px; width: 100%; object-fit: cover;">
+              <% } %>
               <p class="card-text text-muted"><%= (post.content || '').substring(0, 120) %>...</p>
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">

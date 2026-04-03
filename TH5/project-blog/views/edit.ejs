@@ -12,10 +12,24 @@
         <h4>✏️ Sửa bài viết</h4>
       </div>
       <div class="card-body">
-        <form action="/<%= post._id %>?_method=PUT" method="POST">
+        <form action="/<%= post._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
           <div class="mb-3">
             <label class="form-label fw-bold">Tiêu đề</label>
             <input type="text" name="title" value="<%= post.title %>" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Tên tác giả</label>
+            <input type="text" name="author" value="<%= post.author !== 'Anonymous' ? post.author : '' %>" class="form-control" placeholder="Để trống nếu muốn ẩn danh">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Ảnh bài viết</label>
+            <% if(post.imageUrl) { %>
+              <div class="mb-2">
+                <img src="/uploads/<%= post.imageUrl %>" alt="Current image" style="max-height: 100px;">
+              </div>
+            <% } %>
+            <input type="file" name="image" class="form-control" accept="image/*">
+            <small class="text-muted">Bỏ trống nếu không muốn thay đổi ảnh.</small>
           </div>
           <div class="mb-3">
             <label class="form-label fw-bold">Nội dung</label>
