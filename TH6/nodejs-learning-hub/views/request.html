@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js Hub | Request & Headers</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+        // Inline data injected by server
+        const requestData = {{req_data}};
+        
+        window.onload = () => {
+            document.getElementById('methodData').textContent = requestData.method;
+            document.getElementById('urlData').textContent = requestData.url;
+            document.getElementById('queryData').textContent = JSON.stringify(requestData.query, null, 2);
+            document.getElementById('headersData').textContent = JSON.stringify(requestData.headers, null, 2);
+            document.getElementById('resHeadersData').textContent = JSON.stringify(requestData.responseHeaders, null, 2);
+        };
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">Node Hub</a>
+        <div class="nav-links">
+            <a href="/">Trang chủ</a>
+            <a href="/events">Events</a>
+            <a href="/request" class="active">Request</a>
+            <a href="/streams">Streams</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">Thông tin Request & Response</h1>
+            <p class="page-subtitle">Phân tích Request Object và cài đặt Response Headers</p>
+        </div>
+        
+        <div style="margin-bottom: 2rem;">
+            <p style="color: var(--text-muted);">Bạn có thể thay đổi query string trên thanh địa chỉ để xem server phân tích URL (sử dụng <code>url.parse()</code>):</p>
+            <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                <a href="/request?user=john&role=admin" class="btn btn-secondary">Thử thêm Query: ?user=john&role=admin</a>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card" style="animation-delay: 0.1s;">
+                <h2 style="display: flex; align-items: center; gap: 0.5rem;"><span class="badge">REQ</span> Thông tin Cơ bản</h2>
+                <div style="margin-top: 1.5rem;">
+                    <p><strong>Method:</strong> <span class="badge" id="methodData">...</span></p>
+                    <p style="margin-top: 1rem;"><strong>URL:</strong> <span id="urlData" style="color: var(--secondary)">...</span></p>
+                    <p style="margin-top: 1rem;"><strong>Query Parameters:</strong></p>
+                    <div class="code-block" id="queryData">...</div>
+                </div>
+            </div>
+
+            <div class="card" style="animation-delay: 0.2s;">
+                <h2 style="display: flex; align-items: center; gap: 0.5rem;"><span class="badge">RES</span> Cài đặt Response Header</h2>
+                <p style="margin-top: 1rem; color: var(--text-muted);">Các Response Header này được thiết lập thủ công trên luồng Server trước khi trả về nội dung HTML:</p>
+                <div class="code-block" id="resHeadersData">...</div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 2rem; animation-delay: 0.3s;">
+            <h2 style="display: flex; align-items: center; gap: 0.5rem;"><span class="badge">REQ</span> Request Headers</h2>
+            <p style="margin-top: 1rem; color: var(--text-muted);">Tất cả header client gửi lên máy chủ khi yêu cầu trang này:</p>
+            <div class="code-block" id="headersData">...</div>
+        </div>
+    </main>
+</body>
+</html>

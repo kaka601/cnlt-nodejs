@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js Hub | Events</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        #toast {
+            position: fixed; top: 20px; right: 20px; background: rgba(16, 185, 129, 0.9);
+            color: white; padding: 1rem 2rem; border-radius: 8px; transform: translateX(150%);
+            transition: transform 0.3s; z-index: 1000;
+        }
+        #toast.show { transform: translateX(0); }
+    </style>
+</head>
+<body>
+    <div id="toast">✅ Đã kích hoạt sự kiện thành công!</div>
+    
+    <nav class="navbar">
+        <a href="/" class="nav-brand">Node Hub</a>
+        <div class="nav-links">
+            <a href="/">Trang chủ</a>
+            <a href="/events" class="active">Events</a>
+            <a href="/request">Request</a>
+            <a href="/streams">Streams</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">Event Emitter</h1>
+            <p class="page-subtitle">Minh họa cơ chế Event-driven trong Node.js</p>
+        </div>
+
+        <div class="card" style="animation-delay: 0.1s;">
+            <h2>Kích hoạt sự kiện</h2>
+            <p style="margin: 1rem 0; color: var(--text-muted)">Khi bấm nút dưới, trình duyệt sẽ gửi request tới endpoint <code>/event</code> để kích hoạt một sự kiện Node.js trên server. Sự kiện này sẽ sử dụng <code>emit()</code> và ghi một dòng vào log.</p>
+            
+            <button id="triggerBtn" class="btn">⚡ Trigger Event trên Server</button>
+
+            <div id="logResult" class="result-area">
+                <h3 style="color: var(--success); font-size: 1rem;">Server Response:</h3>
+                <div class="code-block" id="responseLog">Chưa có dữ liệu...</div>
+                
+                <a href="/download-log" class="btn btn-secondary" style="margin-top: 1rem;">⬇️ Tải file log</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('triggerBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('triggerBtn');
+            btn.innerHTML = "Đang gửi...";
+            btn.disabled = true;
+            
+            try {
+                const res = await fetch('/event');
+                const data = await res.json();
+                
+                document.getElementById('logResult').style.display = 'block';
+                document.getElementById('responseLog').textContent = JSON.stringify(data, null, 2);
+                
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
+            } catch(e) {
+                alert("Lỗi khi kết nối đến server");
+            } finally {
+                btn.innerHTML = "⚡ Trigger Event trên Server";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js Hub | Streams</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">Node Hub</a>
+        <div class="nav-links">
+            <a href="/">Trang chủ</a>
+            <a href="/events">Events</a>
+            <a href="/request">Request</a>
+            <a href="/streams" class="active">Streams</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">Node.js Streams</h1>
+            <p class="page-subtitle">Minh họa các loại Stream: Readable, Writable, Transform, Duplex</p>
+        </div>
+
+        <div class="grid-2">
+            <!-- Writable Stream -->
+            <div class="card" style="animation-delay: 0.1s;">
+                <h2>1. Writable Stream</h2>
+                <p style="margin-top: 1rem; color: var(--text-muted);">Nhập dữ liệu vào form để nối vào đuôi file server (fs.createWriteStream).</p>
+                
+                <form action="/streams/write" method="POST" style="margin-top: 1.5rem;" target="dummyframe">
+                    <div class="form-group">
+                        <textarea name="content" rows="4" class="form-control" placeholder="Nhập một đoạn văn bản (những dòng này sẽ được lưu)..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">💾 Ghi vào file</button>
+                    <span id="writeMsg" style="margin-left: 10px; color: var(--success); display: none;">Đã gửi yêu cầu!</span>
+                </form>
+            </div>
+
+            <!-- Transform Stream -->
+            <div class="card" style="animation-delay: 0.2s;">
+                <h2>2. Transform Stream</h2>
+                <p style="margin-top: 1rem; color: var(--text-muted);">Gửi dữ liệu lên, server cho qua TransformFilter (UPPERCASE) rồi gửi về ngay lập tức.</p>
+                
+                <form id="transformForm" style="margin-top: 1.5rem;">
+                    <div class="form-group">
+                        <input type="text" id="transformInput" class="form-control" placeholder="nhập chữ viết thường...">
+                    </div>
+                    <button type="submit" class="btn" style="background: var(--secondary)">🔄 Transform</button>
+                </form>
+                <div class="code-block" id="transformResult" style="display: none;"></div>
+            </div>
+            
+            <!-- Readable Stream -->
+            <div class="card" style="animation-delay: 0.3s; grid-column: 1 / -1;">
+                <h2>3 & 4. Readable & Duplex Stream</h2>
+                <p style="margin-top: 1rem; color: var(--text-muted);">Bấm nút In file để đọc nội dung file trên server, dữ liệu được truyền qua EchoDuplex trước khi trả về.</p>
+                
+                <button id="readBtn" class="btn" style="margin-top: 1.5rem;">📖 Đọc dữ liệu File (Readable -> Duplex -> Client)</button>
+                <div class="code-block" id="readResult" style="display: none; height: 150px; overflow-y: auto;"></div>
+            </div>
+        </div>
+
+        <!-- iframe ẩn để form Writable không load lại trang -->
+        <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+    </main>
+
+    <script>
+        // Form Writable event
+        document.querySelector('form[action="/streams/write"]').addEventListener('submit', () => {
+            const msg = document.getElementById('writeMsg');
+            msg.style.display = 'inline';
+            setTimeout(() => { msg.style.display = 'none'; }, 3000);
+            setTimeout(() => { document.querySelector('textarea').value = ''; }, 100);
+        });
+
+        // Form Transform
+        document.getElementById('transformForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const text = document.getElementById('transformInput').value;
+            if(!text) return;
+
+            const res = await fetch('/streams/transform', {
+                method: 'POST',
+                body: text // Gửi raw text để minh họa stream pipe dễ hơn form data
+            });
+            const resultText = await res.text();
+            
+            const resDiv = document.getElementById('transformResult');
+            resDiv.style.display = 'block';
+            resDiv.textContent = `Result: ${resultText}`;
+        });
+
+        // Readable/Duplex reading
+        document.getElementById('readBtn').addEventListener('click', async () => {
+             const btn = document.getElementById('readBtn');
+             btn.disabled = true;
+             btn.innerText = "Đang đọc...";
+             
+             try {
+                 const res = await fetch('/streams/duplex'); // Server pipe Readable -> Duplex -> res
+                 const resultText = await res.text();
+                 const resDiv = document.getElementById('readResult');
+                 resDiv.style.display = 'block';
+                 resDiv.textContent = resultText;
+             } catch(e) {
+                 alert("Lỗi!");
+             } finally {
+                 btn.disabled = false;
+                 btn.innerText = "📖 Đọc dữ liệu File (Readable -> Duplex -> Client)";
+             }
+        });
+    </script>
+</body>
+</html>

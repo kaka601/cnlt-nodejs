@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js Hub | Trang chủ</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">Node Hub</a>
+        <div class="nav-links">
+            <a href="/" class="active">Trang chủ</a>
+            <a href="/events">Events</a>
+            <a href="/request">Request</a>
+            <a href="/streams">Streams</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">Chào mừng đến với hệ thống</h1>
+            <p class="page-subtitle">Bài Thực Hành Tổng Hợp Số 6 - Ứng dụng xây dựng trên HTTP Server thuần</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="card" style="animation-delay: 0.1s;">
+                <h2>Trang phục vụ</h2>
+                <p style="margin-top: 1rem; color: var(--text-muted);">Khám phá các khía cạnh cơ bản của Node.js thông qua các module cốt lõi.</p>
+                <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem;">
+                    <a href="/events" class="btn btn-secondary">⚡ Gửi Event Listener</a>
+                    <a href="/request" class="btn btn-secondary">🌐 Phân tích Request Headers</a>
+                    <a href="/streams" class="btn btn-secondary">🌊 Thao tác với Streams</a>
+                </div>
+            </div>
+
+            <div class="card" style="animation-delay: 0.2s;">
+                <h2>Các API Endpoints</h2>
+                <p style="margin-top: 1rem; color: var(--text-muted);">Các API cung cấp dữ liệu qua hệ thống Server HTTP.</p>
+                
+                <div class="req-list" style="margin-top: 1.5rem;">
+                    <li><span>GET</span> <a href="/json" target="_blank" style="color: var(--secondary)">/json</a></li>
+                    <li><span>GET</span> <a href="/image" target="_blank" style="color: var(--secondary)">/image</a></li>
+                    <li><span>GET</span> <a href="/event" target="_blank" style="color: var(--secondary)">/event</a></li>
+                    <li><span>GET</span> <a href="/download-log" target="_blank" style="color: var(--secondary)">/download-log</a></li>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
