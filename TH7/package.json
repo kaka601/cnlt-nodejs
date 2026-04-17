@@ -1,0 +1,11 @@
+{
+  "name": "th-lam-them-bai3",
+  "version": "1.0.0",
+  "description": "TH Làm Thêm – Bài 3: HTTP, URL, File System Modules trong NodeJS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

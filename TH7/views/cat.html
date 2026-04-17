@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cat Page</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6c63ff, #3f3d56);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 50px 60px;
+      text-align: center;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      max-width: 480px;
+      width: 90%;
+    }
+    .icon { font-size: 80px; display: block; margin-bottom: 18px; }
+    h3 { color: #2d3748; font-size: 2rem; margin-bottom: 14px; }
+    ul {
+      list-style: none;
+      color: #555;
+      font-size: 1.05rem;
+      line-height: 2;
+      margin-bottom: 28px;
+    }
+    ul li::before { content: "🐾 "; }
+    a {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #6c63ff;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: opacity 0.2s;
+    }
+    a:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span class="icon">🐱</span>
+    <h3>This is cat's page!</h3>
+    <ul>
+      <li>Ragdoll</li>
+      <li>Scottish Fold</li>
+      <li>British Shorthair</li>
+      <li>Korat Cat</li>
+    </ul>
+    <a href="/">← Về trang chủ</a>
+  </div>
+</body>
+</html>
