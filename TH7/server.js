@@ -222,7 +222,21 @@ const server = http.createServer((req, res) => {
   let urlData  = url.parse(req.url, true);
   let pathname = urlData.pathname;
 
-  // Xác định file cần đọc
+  // Phục vụ ảnh PNG từ thư mục files/
+  if (pathname.endsWith('.png')) {
+    let imgPath = './files' + pathname;
+    fs.readFile(imgPath, (err, data) => {
+      if (err) {
+        res.writeHead(404);
+        return res.end('Image not found');
+      }
+      res.writeHead(200, { 'Content-Type': 'image/png' });
+      return res.end(data);
+    });
+    return;
+  }
+
+  // Xác định file HTML cần đọc
   let fileName = './views' + pathname;
   if (pathname === '/') {
     fileName = './views/index.html';
