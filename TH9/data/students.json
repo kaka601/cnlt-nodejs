@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "name": "Nguyen Van A",
+        "email": "vana@example.com",
+        "age": 20,
+        "class": "CNTT1",
+        "isDeleted": false
+    },
+    {
+        "id": 2,
+        "name": "Tran Thi B",
+        "email": "thib@example.com",
+        "age": 22,
+        "class": "CNTT2",
+        "isDeleted": false
+    },
+    {
+        "id": 3,
+        "name": "Le Van C",
+        "email": "vanc@example.com",
+        "age": 19,
+        "class": "CNTT1",
+        "isDeleted": false
+    },
+    {
+        "id": 4,
+        "name": "Hoang Van E",
+        "email": "vane@example.com",
+        "age": 20,
+        "class": "CNTT2",
+        "isDeleted": true
+    }
+]
