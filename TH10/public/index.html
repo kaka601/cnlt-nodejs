@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatApp Realtime | TH10</title>
+  <meta name="description" content="Ứng dụng chat realtime xây dựng bằng Node.js, Express và Socket.IO" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen" class="screen active">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-icon">💬</div>
+        <h1>ChatApp</h1>
+        <p>Trò chuyện realtime với bạn bè</p>
+      </div>
+      <form id="join-form">
+        <div class="input-group">
+          <label for="username-input">Tên của bạn</label>
+          <input
+            type="text"
+            id="username-input"
+            placeholder="Nhập tên để tham gia..."
+            maxlength="30"
+            autocomplete="off"
+            required
+          />
+        </div>
+        <div id="join-error" class="error-msg hidden"></div>
+        <button type="submit" class="btn-primary" id="join-btn">
+          <span>Tham gia ngay</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CHAT SCREEN -->
+  <div id="chat-screen" class="screen">
+
+    <!-- SIDEBAR: Online Users -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <span class="brand-icon">💬</span>
+          <span class="brand-name">ChatApp</span>
+        </div>
+        <div class="my-info" id="my-info">
+          <div class="avatar" id="my-avatar">?</div>
+          <div>
+            <div class="my-name" id="my-name-display">...</div>
+            <div class="status-badge">● Online</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-title">
+          <span>Người dùng online</span>
+          <span class="user-count" id="user-count">0</span>
+        </div>
+        <ul class="user-list" id="user-list">
+          <!-- Populated by JS -->
+        </ul>
+      </div>
+
+      <button class="btn-logout" id="logout-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Đăng xuất
+      </button>
+    </aside>
+
+    <!-- MAIN CHAT AREA -->
+    <main class="chat-area">
+      <!-- No chat selected -->
+      <div class="no-chat" id="no-chat">
+        <div class="no-chat-icon">💬</div>
+        <h2>Chọn người để bắt đầu trò chuyện</h2>
+        <p>Chọn một người dùng từ danh sách bên trái để bắt đầu chat</p>
+      </div>
+
+      <!-- Chat window -->
+      <div class="chat-window hidden" id="chat-window">
+        <!-- Chat header -->
+        <div class="chat-header" id="chat-header">
+          <div class="chat-header-info">
+            <div class="avatar" id="chat-avatar">?</div>
+            <div>
+              <div class="chat-username" id="chat-username">...</div>
+              <div class="chat-status">● Đang hoạt động</div>
+            </div>
+          </div>
+          <button class="btn-close-chat" id="close-chat-btn" title="Đóng chat">✕</button>
+        </div>
+
+        <!-- Messages -->
+        <div class="messages-container" id="messages-container">
+          <!-- Messages populated by JS -->
+        </div>
+
+        <!-- Message Input -->
+        <div class="message-input-area">
+          <form id="message-form">
+            <input
+              type="text"
+              id="message-input"
+              placeholder="Nhập tin nhắn..."
+              autocomplete="off"
+              maxlength="500"
+            />
+            <button type="submit" class="btn-send" id="send-btn" title="Gửi tin nhắn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- NOTIFICATION TOAST -->
+  <div id="toast-container"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
